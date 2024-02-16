@@ -6,6 +6,7 @@ django.setup()
 from rango.models import Category, Page
 
 def populate():
+    view_number = 10
     python_pages = [
         {'title': 'Official Python Tutorial',
         'url':'http://docs.python.org/3/tutorial/'},
@@ -36,7 +37,8 @@ def populate():
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data)
         for p in cat_data['pages']:
-            add_page(c, p['title'], p['url'])
+            add_page(c, p['title'], p['url'],views=view_number)
+            view_number += 10
 
     for c in Category.objects.all():
         for p in Page.objects.filter(category=c):
